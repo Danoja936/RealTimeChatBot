@@ -11,10 +11,14 @@ RED = "\033[91m"
 RESET = "\033[0m"
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Ask the user which server IP to connect to (server laptop's IP on the same network)
+server_ip = input("Enter server IP (e.g. 192.168.1.5): ").strip() or '127.0.0.1'
+
 try:
-    client.connect(('127.0.0.1', 5566))
+    client.connect((server_ip, 5566))
 except:
-    print(f"{RED}Error: Server not running!{RESET}")
+    print(f"{RED}Error: Could not connect to server at {server_ip}:5566!{RESET}")
     sys.exit()
 
 nickname = input("Choose your nickname: ")

@@ -3,7 +3,7 @@ import threading
 import json
 from chatbot import chatbot_response
 
-HOST = '127.0.0.1'
+HOST = '0.0.0.0'
 PORT = 5566
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

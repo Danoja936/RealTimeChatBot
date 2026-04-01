@@ -1,17 +1,22 @@
 try:
     from google import genai
     import os
+    from dotenv import load_dotenv
     has_lib = True
 except ImportError:
     has_lib = False
-
-API_KEY = "AIzaSyCv-0KkQbt1Kb2J_dC8i7U5kgTgyvblp58"
 
 
 use_ai = False
 if has_lib:
     try:
-        client = genai.Client(api_key=os.getenv("GEMINI_API_KEY", API_KEY))
+        # Load variables from .env file (including GEMINI_API_KEY)
+        load_dotenv()
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY not found in environment/.env file")
+
+        client = genai.Client(api_key=api_key)
         use_ai = True
     except Exception as e:
         print(f"AI Initialization failed: {e}")
